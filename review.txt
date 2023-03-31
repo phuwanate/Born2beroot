@@ -1,0 +1,155 @@
+----------------------------------------------------------Mandatory part---------------------------------------------------------------
+<- Project overview ->
+
+- the basic between of Rocky and Debian :
+	Year
+		- Rocky is a new distribution created in 2021 (by CentOS).
+		- Dabian has been around since 1993.
+	Packages managers(default) :
+		- Rocky uses YUM/DNF.
+		- Debain uses APT.
+	Comunity
+		Debain has a large and active community, while Rocky Linux is still building its community.
+
+	The Difference between Apptitude and Apt
+	User interface
+		- Aptitude has a txt-based user interface.
+		- Apt has a simple command-line interface.
+	Automatic removal of unused packages :
+		- Aptitude automatically removes packages that are noloneger needed, while Apt does not.
+
+	What APPArmor is
+		AppArmor is a Linux kernel security module that "allows the system administrator to restrict
+ 	programs capabilities with per-program profiles" like network access, the permission to read,
+	write, or execute files on matching paths.
+
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- Simpler setup ->
+	Check that the UFW service is started.
+		: $ sudo ufw status
+	
+	Check that the SSH service is started.
+		: $ sudo systemctl status sshd
+	
+	Check that the chosen OS is Debian or Rocky.
+		: $ sudo cat /etc/os-release
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- User - >
+	Check that the user login.
+		: $ sudo groups <user-name>
+	
+	Create a new user.
+		: $ sudo useradd <eva-user>
+	
+	Creat an "evaluating" group
+		: $ sudo groupadd evaluating
+	
+	Add the "eva-user" to "evaluating group"
+		: $ sudo adduser <eva-user> <evaluating-group>
+		: $ sudo groups <eva-user> ; to Check if it in the evaluating froups already.
+	
+	Set up the password of "eva-user"
+		: $ sudo passwd <eva-user> ; try to check the passwd policy with typing wrong passwd.
+
+	Check about modification password rules :
+		: $ sudo cat /etc/login.defs
+		- password has to expire every 30 days.
+		- the minumum  of days allowed before modification passwd is 2 days.
+		- user has to receive a warning message 7 days before the passwd expires.
+	
+	Check the strong password policy :
+		: $ sudo cat /etc/security/pwquality.conf
+		- passwd must be at least 10 chars, it must contain upper, lower letter and a digit number, max repaet is 3
+
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- Hostname and partitions
+	Modify this hostname by your logings
+		: $ sudo hostnamectl set-hostname <user-eva>
+	
+	How to view the partition
+		: $ lsblk
+	
+	Explain about LVM 
+		: LVM is the Logical Volume Manager. it allow you to create "virtual" partitions that span over several disks.It means
+	the size of the partitions are no loneger limited by individual disks but by their cumulative volume of physical disks. 
+
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- SUDO ->
+
+- Check that sudo is properly installed on the VM.
+	: $ sudo --version
+
+- Show assinging new user to the "sudo" group.
+	: $ sudo useradd <testuser> ; creat new one.
+	: $ sudo adduser <testuser> sudo ; add to sudo group.
+	: $ sudo userdel <testuser> ; deleted user.
+
+- Explain about the value and operation of sudo.
+	- sudo (Super user) is the preceded command to give permission as superuser(root user).
+
+- Show the implermentaion of the rules imposed by the subject.
+	: $ cat /etc/suders.d/requirements; 
+	show them try to create new user with wrong password 3 times to test the limited to 3 attempets 
+	and baddpass-message rule.
+
+- Verify that the "/var/log/sudo/" folder exsit and has at least one file, See if the files have been updated.
+	: $ ls /var/log/sudo/
+	: $ cat /var/log/sudo/sudo.log ; before changes
+	: $ sudo ufw status;
+	: $ cat /var/log/sudo/sudo.log ; after it changed.
+
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- UFW / Firewalld -> 
+		 	
+	Check that the "UFW" program is properly installed.
+		: $ sudo ufw status
+	
+	Explain about basically what UFW is and the value of using it.
+		: UFW is uncomplicated filewall, The default filewall for Debian. It will protect the network by checking 
+		the data in-out in the network protocal (4242/tcp)
+	
+	List the active rules in UFW.A rule must exit for port 4242.
+		: $ sudo ufw status verbose
+
+	Add a new rule to open port 8080,Then check that this one has been added and delete this new rule.
+		: $ sudo ufw allow 8080
+		: $ sudo ufw status numbered
+		: $ sudo ufw delete <Port8080-numbered>
+	 
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- SSH ->
+
+	Check that the SSH service is properly installed on the VM
+		: $ sudo systemctl status sshd
+	
+	Explain basically what SSH is and the value of using it
+		: SSH (Secure Shell) is a cyptographic network communication protocol that enables two computers 
+		to communicate with secure channel over an unsecured nework
+	
+	Verify that the SSH service only uses port 4242
+		: $ sudo systemctl status sshd
+
+---------------------------------------------------------------------------------------------------------------------------------------	
+<- Script monitoring ->
+	
+	What "cron" is
+		: is a command used for recuuring commandlines (every day,every week, etc.)
+		the command is
+		* is every ...
+		*/Minute Hour DayofMonth Mounth DayofWeek	
+
+----------------------------------------------------------Bonus part-------------------------------------------------------------------
+<- Service ->
+
+	For service Fail2ban:
+	Check status of Fail2ban if it works.
+	: $ sudo fail2ban-client status
+
+	Check Total failed, Banned IP list.
+	: $ sudo fail2ban-client status sshd
+
+	Check the rules of Fail2ban
+	: $ /etc/fail2ban/jail.conf
+
+	If anything was changed
+	: $ sudo systemctl restart fail2ban	
