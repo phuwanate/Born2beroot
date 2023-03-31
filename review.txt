@@ -3,20 +3,20 @@
 
 - the basic between of Rocky and Debian :
 	Year
-		- Rocky is a new distribution created in 2021 (by CentOS).
-		- Dabian has been around since 1993.
+		: Rocky is a new distribution created in 2021 (by CentOS).
+		: Dabian has been around since 1993.
 	Packages managers(default) :
-		- Rocky uses YUM/DNF.
-		- Debain uses APT.
+		: Rocky uses YUM/DNF.
+		: Debain uses APT.
 	Comunity
 		Debain has a large and active community, while Rocky Linux is still building its community.
 
 	The Difference between Apptitude and Apt
 	User interface
-		- Aptitude has a txt-based user interface.
-		- Apt has a simple command-line interface.
+		: Aptitude has a txt-based user interface.
+		: Apt has a simple command-line interface.
 	Automatic removal of unused packages :
-		- Aptitude automatically removes packages that are noloneger needed, while Apt does not.
+		: Aptitude automatically removes packages that are noloneger needed, while Apt does not.
 
 	What APPArmor is
 		AppArmor is a Linux kernel security module that "allows the system administrator to restrict
@@ -76,27 +76,27 @@
 ---------------------------------------------------------------------------------------------------------------------------------------	
 <- SUDO ->
 
-- Check that sudo is properly installed on the VM.
-	: $ sudo --version
+	Check that sudo is properly installed on the VM.
+		: $ sudo --version
 
-- Show assinging new user to the "sudo" group.
-	: $ sudo useradd <testuser> ; creat new one.
-	: $ sudo adduser <testuser> sudo ; add to sudo group.
-	: $ sudo userdel <testuser> ; deleted user.
+	Show assinging new user to the "sudo" group.
+		: $ sudo useradd <testuser> ; creat new one.
+		: $ sudo adduser <testuser> sudo ; add to sudo group.
+		: $ sudo userdel <testuser> ; deleted user.
 
-- Explain about the value and operation of sudo.
-	- sudo (Super user) is the preceded command to give permission as superuser(root user).
+	Explain about the value and operation of sudo.
+		: sudo (Super user) is the preceded command to give permission as superuser(root user).
 
-- Show the implermentaion of the rules imposed by the subject.
-	: $ cat /etc/suders.d/requirements; 
-	show them try to create new user with wrong password 3 times to test the limited to 3 attempets 
-	and baddpass-message rule.
+	Show the implermentaion of the rules imposed by the subject.
+		: $ cat /etc/suders.d/requirements; 
+		show them try to create new user with wrong password 3 times to test the limited to 3 attempets 
+		and baddpass-message rule.
 
-- Verify that the "/var/log/sudo/" folder exsit and has at least one file, See if the files have been updated.
-	: $ ls /var/log/sudo/
-	: $ cat /var/log/sudo/sudo.log ; before changes
-	: $ sudo ufw status;
-	: $ cat /var/log/sudo/sudo.log ; after it changed.
+	Verify that the "/var/log/sudo/" folder exsit and has at least one file, See if the files have been updated.
+		: $ ls /var/log/sudo/
+		: $ cat /var/log/sudo/sudo.log ; before changes
+		: $ sudo ufw status;
+		: $ cat /var/log/sudo/sudo.log ; after it changed.
 
 ---------------------------------------------------------------------------------------------------------------------------------------	
 <- UFW / Firewalld -> 
@@ -143,13 +143,13 @@
 
 	For service Fail2ban:
 	Check status of Fail2ban if it works.
-	: $ sudo fail2ban-client status
+		: $ sudo fail2ban-client status
 
 	Check Total failed, Banned IP list.
-	: $ sudo fail2ban-client status sshd
+		: $ sudo fail2ban-client status sshd
 
 	Check the rules of Fail2ban
-	: $ /etc/fail2ban/jail.conf
+		: $ /etc/fail2ban/jail.conf
 
 	If anything was changed
-	: $ sudo systemctl restart fail2ban	
+		: $ sudo systemctl restart fail2ban	
