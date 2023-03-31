@@ -12,10 +12,10 @@
 		Debain has a large and active community, while Rocky Linux is still building its community.
 
 	The Difference between Apptitude and Apt
-	User interface
+		- User interface
 		: Aptitude has a txt-based user interface.
 		: Apt has a simple command-line interface.
-	Automatic removal of unused packages :
+		- Automatic removal of unused packages
 		: Aptitude automatically removes packages that are noloneger needed, while Apt does not.
 
 	What APPArmor is
