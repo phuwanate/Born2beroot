@@ -128,6 +128,9 @@
 	
 	Verify that the SSH service only uses port 4242
 		: $ sudo systemctl status sshd
+	
+	Check the rules of SSH
+		: $ sudo vim /etc/ssh/sshd_config
 
 ---------------------------------------------------------------------------------------------------------------------------------------	
 <- Script monitoring ->
